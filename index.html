@@ -462,19 +462,21 @@
             <p class="section-subtitle fade-in">// ご相談・お問い合わせ</p>
 
             <div class="contact-box fade-in">
-                <div class="form-group">
-                    <label for="name">お名前 / 貴社名</label>
-                    <input type="text" id="name" class="form-control" placeholder="山田 太郎">
-                </div>
-                <div class="form-group">
-                    <label for="email">メールアドレス</label>
-                    <input type="email" id="email" class="form-control" placeholder="example@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="message">ご相談内容</label>
-                    <textarea id="message" class="form-control" placeholder="ご相談内容や解決したい課題をご記入ください"></textarea>
-                </div>
-                <a href="mailto:xnova00.office@gmail.com" class="btn btn-primary" style="width: 100%; text-align: center;">メールを送る</a>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">お名前 / 貴社名</label>
+                        <input type="text" id="name" class="form-control" placeholder="山田 太郎" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" class="form-control" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">ご相談内容</label>
+                        <textarea id="message" class="form-control" placeholder="ご相談内容や解決したい課題をご記入ください" required></textarea>
+                    </div>
+                    <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%;">メールを送る</button>
+                </form>
 
                 <div class="email-direct">
                     Direct Email: <a href="mailto:xnova00.office@gmail.com">xnova00.office@gmail.com</a>
@@ -490,7 +492,7 @@
         </div>
     </footer>
 
-    <!-- JS: Scroll Animation -->
+    <!-- JS: Scroll Animation & Real Mail Sending -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
@@ -504,6 +506,47 @@
             });
 
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // メール自動送信処理
+            const contactForm = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    submitBtn.disabled = true;
+                    submitBtn.innerText = '送信中...';
+
+                    const gasUrl = "https://script.google.com/macros/s/AKfycby2lTxZxCv5w62ldYo9cuAtV2feMvawlb1vsDSl0u2kQGlmVEQIJcpXbHa8vxIU1N13kg/exec";
+
+                    const payload = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        message: document.getElementById('message').value
+                    };
+
+                    fetch(gasUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(() => {
+                        alert('お問い合わせメールを送信しました。');
+                        contactForm.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = 'メールを送る';
+                    })
+                    .catch(error => {
+                        alert('送信に失敗しました。時間をおいて再度お試しください。');
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = 'メールを送る';
+                    });
+                });
+            }
         });
     </script>
 </body>
