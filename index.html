@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-NOVA00 | IT Consultant & NFC Solutions</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Reset & Variables --- */
+        :root {
+            --bg-color: #0a0b10;
+            --card-bg: rgba(22, 27, 38, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-accent: #00f0ff;
+            --secondary-accent: #7000ff;
+            --text-main: #f0f4f8;
+            --text-muted: #8a99ad;
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(112, 0, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.12) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* --- Global Components --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-accent);
+            box-shadow: 0 0 10px var(--primary-accent);
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 48px;
+            font-family: var(--font-code);
+        }
+
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.15);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-accent);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #fff;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 11, 16, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-accent);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 180px 0 100px 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-tag {
+            font-family: var(--font-code);
+            color: var(--primary-accent);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 650px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        /* --- Profile / Strengths --- */
+        .profile-card {
+            border-left: 4px solid var(--primary-accent);
+        }
+
+        .profile-card h3 {
+            font-family: var(--font-head);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        /* --- Services --- */
+        .service-icon {
+            font-family: var(--font-code);
+            color: var(--primary-accent);
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-family: var(--font-head);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- Products --- */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary-accent);
+            border-radius: 4px;
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            margin-bottom: 12px;
+        }
+
+        .product-card h3 {
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .product-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- Contact --- */
+        .contact-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-accent);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .email-direct {
+            margin-top: 24px;
+            text-align: center;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .email-direct a {
+            color: var(--primary-accent);
+            text-decoration: none;
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            text-align: center;
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Scroll Animation Styles --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .section { padding: 60px 0; }
+            .contact-box { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header / Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">X-NOVA<span>00</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">// ABOUT</a></li>
+                <li><a href="#services">// SERVICES</a></li>
+                <li><a href="#products">// PRODUCTS</a></li>
+                <li><a href="#contact">// CONTACT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero-tag fade-in">// IT CONSULTANT & NFC SOLUTIONS</span>
+            <h1 class="hero-title fade-in">
+                現場の課題を、<br>
+                <span class="gradient-text">直感的で確実なシステム</span>へ。
+            </h1>
+            <p class="hero-desc fade-in">
+                複雑な操作や机上の理論はいりません。X-NOVA00は、現場で働く「人」に寄り添い、NFCをはじめとする最先端の仕組みで、確実に成果が出るIT改善・システム構築を実現します。
+            </p>
+            <a href="#contact" class="btn btn-primary fade-in">お問い合わせはこちら</a>
+        </div>
+    </section>
+
+    <!-- 3. Profile / Strengths -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">ABOUT</h2>
+            <p class="section-subtitle fade-in">// 姿勢と強み</p>
+
+            <div class="grid grid-2">
+                <div class="card profile-card fade-in">
+                    <h3>現場ファーストの徹底</h3>
+                    <p>専門用語を排し、実際にシステムを使う現場の皆様の目線に立った対話を最優先します。本当に「使われる」仕組みしか構築しません。</p>
+                </div>
+                <div class="card profile-card fade-in">
+                    <h3>有料でも欲しい仕組みの提供</h3>
+                    <p>「あったらいいな」ではなく、「これなしでは回らない」レベルの価値を提供。不正やミスの隙を与えないタイムカードシステムなど、盲点を突いた実践的ソリューションを構築します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Services -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">SERVICES</h2>
+            <p class="section-subtitle fade-in">// 提供可能なソリューション</p>
+
+            <div class="grid grid-3">
+                <div class="card service-card fade-in">
+                    <div class="service-icon">[01]</div>
+                    <h3>現場のIT改善</h3>
+                    <p>業務の流れを観察・分析し、無駄な作業をカット。現場スタッフが直感的に使える運用システムを設計・導入します。</p>
+                </div>
+                <div class="card service-card fade-in">
+                    <div class="service-icon">[02]</div>
+                    <h3>NFC打刻タイムカード</h3>
+                    <p>スマホやカードをかざすだけの超軽量ソリューション。不正打刻を防ぎ、正確な勤怠データを一瞬で記録・集計します。</p>
+                </div>
+                <div class="card service-card fade-in">
+                    <div class="service-icon">[03]</div>
+                    <h3>PC入力作業の効率化</h3>
+                    <p>手入力による転記作業や二重入力を徹底排除。自動化ロジックの組み込みで入力ミスゼロと時間の短縮を実現します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Products / Ideas -->
+    <section id="products" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">PRODUCTS</h2>
+            <p class="section-subtitle fade-in">// 実績・アイデア</p>
+
+            <div class="grid grid-3">
+                <div class="card product-card fade-in">
+                    <span class="tag">NFC Solution</span>
+                    <h3>次世代NFCタイムカード</h3>
+                    <p>従来の勤怠管理の盲点を解消。スマホやタグを活用し、ワンタップで完了する不正の起きない勤怠システム。</p>
+                </div>
+                <div class="card product-card fade-in">
+                    <span class="tag">Safety Tech</span>
+                    <h3>高齢者あんしんお守り</h3>
+                    <p>NFC技術を内蔵したお守り。緊急時の連絡先保持や見守り体制の強化を、さりげなく身につけられる形で実現。</p>
+                </div>
+                <div class="card product-card fade-in">
+                    <span class="tag">Safety Tech</span>
+                    <h3>こども登下校お守り</h3>
+                    <p>通学バッグにかざすだけで無事の到着・帰宅を知らせる安全管理ソリューション。保護者に安心を提供します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">CONTACT</h2>
+            <p class="section-subtitle fade-in">// ご相談・お問い合わせ</p>
+
+            <div class="contact-box fade-in">
+                <form action="#" method="POST" onclick="event.preventDefault(); alert('お問い合わせを受信しました（デモ）');">
+                    <div class="form-group">
+                        <label for="name">お名前 / 貴社名</label>
+                        <input type="text" id="name" class="form-control" placeholder="山田 太郎" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" class="form-control" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">ご相談内容</label>
+                        <textarea id="message" class="form-control" placeholder="ご相談内容や解決したい課題をご記入ください" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">送信する</button>
+                </form>
+
+                <div class="email-direct">
+                    Direct Email: <a href="mailto:xnova00.office@gmail.com">xnova00.office@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; X-NOVA00. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS: Scroll Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
