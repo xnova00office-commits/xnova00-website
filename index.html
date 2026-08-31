@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="google-site-verification" content="prXUu7VgkjX3tjdmuRCAHx5vn75Op4pviQRCFMh_QcY" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X-NOVA00 | IT Consultant & NFC Solutions</title>
     <!-- Google Fonts -->
@@ -324,6 +325,56 @@
             text-decoration: none;
         }
 
+        /* --- Privacy & Terms Section --- */
+        .legal-section {
+            background: rgba(14, 18, 26, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: 80px 0;
+        }
+
+        .legal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .legal-box h3 {
+            font-family: var(--font-head);
+            color: var(--primary-accent);
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+        }
+
+        .legal-box h4 {
+            color: var(--text-main);
+            font-size: 1rem;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        .legal-box p {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .legal-box ul {
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .legal-box li {
+            margin-bottom: 6px;
+        }
+
+        .legal-box a {
+            color: var(--primary-accent);
+            text-decoration: underline;
+        }
+
         /* --- Footer --- */
         footer {
             border-top: 1px solid var(--border-color);
@@ -351,6 +402,7 @@
             .nav-links { display: none; }
             .section { padding: 60px 0; }
             .contact-box { padding: 24px; }
+            .legal-box { padding: 20px; }
         }
     </style>
 </head>
@@ -365,6 +417,7 @@
                 <li><a href="#services">// SERVICES</a></li>
                 <li><a href="#products">// PRODUCTS</a></li>
                 <li><a href="#contact">// CONTACT</a></li>
+                <li><a href="#privacy">// PRIVACY</a></li>
             </ul>
         </div>
     </header>
@@ -485,10 +538,68 @@
         </div>
     </section>
 
-    <!-- 7. Footer -->
+    <!-- 7. Legal & Privacy Policy Section (for Google OAuth Verification) -->
+    <section id="privacy" class="legal-section">
+        <div class="container">
+            <h2 class="section-title fade-in">LEGAL & PRIVACY</h2>
+            <p class="section-subtitle fade-in">// プライバシーポリシー & 利用規約</p>
+
+            <div class="legal-box fade-in">
+                <h3>プライバシーポリシー（個人情報保護方針）</h3>
+                <p>X-NOVA00（以下、「当方」）は、提供する各種アプリケーション、Google Workspace アドオン、および関連サービス（以下、「本サービス」）におけるユーザーの個人情報およびGoogleユーザーデータの取扱いについて、以下のとおりプライバシーポリシーを定めます。</p>
+
+                <h4>1. 取得する情報</h4>
+                <ul>
+                    <li>ユーザー識別子（Googleアカウントのメールアドレス、氏名、LINEユーザーID等）</li>
+                    <li>本サービスの機能提供に伴う勤怠記録、打刻データ、スプレッドシート上の設定情報</li>
+                </ul>
+
+                <h4>2. データの利用目的</h4>
+                <ul>
+                    <li>本サービスの勤怠管理・打刻・集計機能の円滑な提供および維持のため</li>
+                    <li>Google スプレッドシートとの安全なデータ同期およびユーザー認証のため</li>
+                    <li>お問い合わせ対応およびサポート業務のため</li>
+                </ul>
+
+                <h4>3. データ保護メカニズム（Data Protection Mechanisms）</h4>
+                <ul>
+                    <li>本サービスは、Google Workspace APIを通じて取得したすべてのデータを業界標準のSSL/TLS暗号化プロトコルにより保護して通信します。</li>
+                    <li>Googleユーザーデータ（スプレッドシートの内容やユーザープロファイル）は、ユーザー自身が指定したGoogleスプレッドシート上およびクライアント側メモリ内でのみ処理され、当方の外部データベースや第三者サーバーへ無断で保存・転送されることは一切ありません。</li>
+                </ul>
+
+                <h4>4. データの保持および削除（Data Retention and Deletion Policy）</h4>
+                <ul>
+                    <li><strong>保持期間：</strong>本サービスは処理実行時にのみ一時的にデータを参照し、セッション終了後にメモリ上のデータは即時破棄されます。スプレッドシート上の記録データはユーザー自身のGoogleドライブ内にのみ保持されます。</li>
+                    <li><strong>削除申請手順：</strong>ユーザーは、Googleアカウント設定の「サードパーティ製アプリとサービス」画面からいつでも本サービスへのアクセス権限を取り消すことができます。また、サポート窓口（<a href="mailto:xnova00.office@gmail.com">xnova00.office@gmail.com</a>）へご連絡いただくことで、関連する設定データの完全削除を要求できます。当方は申請受領後、速やかに削除対応を完了します。</li>
+                </ul>
+
+                <h4>5. Google API データの使用について（Limited Use Disclosure）</h4>
+                <p>本サービスがGoogle APIから受け取った情報の使用および他のアプリへの転送は、<a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API サービスのユーザーデータに関するポリシー</a>（限定使用要件を含む）に準拠します。AIモデルの学習や第三者への広告配信を目的としてGoogleユーザーデータを使用することは一切ありません。</p>
+
+                <h4>6. 第三者への開示・提供</h4>
+                <p>当方は、法令に基づく場合を除き、ユーザーの同意を得ることなく第三者に個人情報を提供・共有することはありません。</p>
+
+                <h4>7. お問い合わせ窓口</h4>
+                <p>運営：X-NOVA00<br>
+                担当窓口：鈴木 富士広<br>
+                連絡先：<a href="mailto:xnova00.office@gmail.com">xnova00.office@gmail.com</a></p>
+            </div>
+
+            <div class="legal-box fade-in">
+                <h3>利用規約</h3>
+                <p>本サービスをご利用いただくにあたり、以下の利用規約に同意いただくものとします。</p>
+                <ul>
+                    <li>ユーザーは自己の責任において本サービスを利用し、不正アクセスや不正利用を行わないものとします。</li>
+                    <li>当方は、本サービスの提供の中断、停止、終了、利用不能等によって生じたいかなる損害についても、一切の責任を負いません。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Footer -->
     <footer>
         <div class="container">
-            <p>&copy; X-NOVA00. All Rights Reserved.</p>
+            <p>&copy; 2026 X-NOVA00. All Rights Reserved.</p>
         </div>
     </footer>
 
